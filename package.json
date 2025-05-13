@@ -1,0 +1,21 @@
+{
+  "name": "@igalni/logistic-validation",
+  "version": "1.1.0",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "dependencies": {
+    "mongoose": "^8.10.0"
+  },
+  "keywords": [
+    "validation",
+    "javascript",
+    "typescript"
+  ],
+  "author": "Igal nikolaev",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "publishConfig": {
+    "access": "public"
+  }
+}
