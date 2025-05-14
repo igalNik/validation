@@ -1,3 +1,5 @@
+import { errorTypes } from "./validator";
+
 export function validateEmail(
   email: string
 ): boolean;
@@ -37,7 +39,18 @@ interface ValidationPipe {
   isAlphaHebrewOrEnglish(): ValidationPipe;
   isNumeric(): ValidationPipe;
   isStrongPassword(): ValidationPipe;
+  result(): ValidationResult;
   isValid(): boolean;
+}
+
+type ValidationMethod = Exclude<
+  keyof ValidationPipe,
+  "result" | "isValid"
+>;
+
+interface ValidationResult {
+  isValid: boolean;
+  errors: ValidationMethod[];
 }
 
 export function validate(

@@ -1,9 +1,11 @@
 const helpers = require("./validation.helper");
 const validator = require("./validator");
-
 console.log(
-  validator("test").isValidEmail()
-    .isValidEmail.name
+  validator("")
+    .isValidEmail()
+    .isValidEmail()
+    .required()
+    .result()
 );
 module.exports = {
   ...helpers,

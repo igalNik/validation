@@ -9,56 +9,131 @@ const {
 function validator(str = "") {
   let isValid = true;
 
+  const errors = [];
+
   const pipe = {
-    required: (length) => {
+    required: function () {
+      const isValidLength =
+        str.length > 0;
+
       isValid =
-        isValid && str.length > 0;
+        isValid && isValidLength;
+
+      if (!isValidLength) {
+        errors.push(pipe.required.name);
+      }
+
       return pipe;
     },
-    min: (length) => {
+    min: function (length) {
+      const isValidLength =
+        str.length >= length;
+
       isValid =
-        isValid && str.length >= length;
+        isValid && isValidLength;
+
+      if (!isValidLength) {
+        errors.push(pipe.min.name);
+      }
+
       return pipe;
     },
-    max: (length) => {
+    max: function (length) {
+      const isValidLength =
+        str.length <= length;
+
       isValid =
-        isValid && str.length <= length;
-    },
-    isValidEmail: () => {
-      isValid =
-        isValid && validateEmail(str);
+        isValid && isValidLength;
+
+      if (!isValidLength) {
+        errors.push(pipe.max.name);
+      }
+
       return pipe;
     },
-    isValidIsraeliMobileNumber: () => {
-      isValid =
-        isValid &&
-        validateIsraeliMobileNumber(
-          str
+    isValidEmail: function () {
+      const isValidEmail =
+        validateEmail(str);
+
+      isValid = isValid && isValidEmail;
+
+      if (!isValidEmail) {
+        errors.push(
+          pipe.isValidEmail.name
         );
+      }
       return pipe;
     },
-    isAlphaHebrewOrEnglish: () => {
-      isValid =
-        isValid &&
-        isAlphaHebrewOrEnglish(str);
+    isValidIsraeliMobileNumber:
+      function () {
+        const isValidIsraeliMobileNumber =
+          validateIsraeliMobileNumber(
+            str
+          );
+
+        isValid =
+          isValid &&
+          isValidIsraeliMobileNumber;
+        if (
+          !isValidIsraeliMobileNumber
+        ) {
+          errors.push(
+            pipe
+              .isValidIsraeliMobileNumber
+              .name
+          );
+        }
+        return pipe;
+      },
+    isAlphaHebrewOrEnglish:
+      function () {
+        const isAlphaHebrewOrEnglish =
+          isAlphaHebrewOrEnglish(str);
+
+        isValid =
+          isValid &&
+          isAlphaHebrewOrEnglish;
+        if (!isAlphaHebrewOrEnglish) {
+          errors.push(
+            pipe.isAlphaHebrewOrEnglish
+              .name
+          );
+        }
+        return pipe;
+      },
+    isNumeric: function () {
+      const isNumeric = isNumeric(str);
+
+      isValid = isValid && isNumeric;
+      if (!isNumeric) {
+        errors.push(
+          pipe.isNumeric.name
+        );
+      }
       return pipe;
     },
-    isNumeric: () => {
-      isValid =
-        isValid && isNumeric(str);
-      return pipe;
-    },
-    isStrongPassword: () => {
-      isValid =
-        isValid &&
+    isStrongPassword: function () {
+      const isStrongPassword =
         isStrongPassword(str);
-      return pipe;
-    },
-    isNumeric: () => {
       isValid =
-        isValid && isNumeric(str);
+        isValid && isStrongPassword;
+      if (!isStrongPassword) {
+        errors.push(
+          pipe.isStrongPassword.name
+        );
+      }
       return pipe;
     },
+    isNumeric: function () {
+      const isNumeric = isNumeric(str);
+
+      isValid = isValid && isNumeric;
+      return pipe;
+    },
+    result: () => ({
+      isValid,
+      errors,
+    }),
     isValid: () => isValid,
   };
   return pipe;
