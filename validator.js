@@ -1,10 +1,4 @@
-const {
-  validateEmail,
-  validateIsraeliMobileNumber,
-  isAlphaHebrewOrEnglish,
-  isNumeric,
-  isStrongPassword,
-} = require("./validation.helper");
+const validators = require("./validation.helper");
 
 function validator(str = "") {
   let isValid = true;
@@ -53,7 +47,7 @@ function validator(str = "") {
     },
     isValidEmail: function () {
       const currentResult =
-        validateEmail(str);
+        validators.validateEmail(str);
 
       isValid =
         isValid && currentResult;
@@ -68,7 +62,7 @@ function validator(str = "") {
     isValidIsraeliMobileNumber:
       function () {
         const currentResult =
-          validateIsraeliMobileNumber(
+          validators.validateIsraeliMobileNumber(
             str
           );
 
@@ -86,7 +80,9 @@ function validator(str = "") {
     isAlphaHebrewOrEnglish:
       function () {
         const currentResult =
-          isAlphaHebrewOrEnglish(str);
+          validators.isAlphaHebrewOrEnglish(
+            str
+          );
 
         isValid =
           isValid && currentResult;
@@ -100,7 +96,7 @@ function validator(str = "") {
       },
     isNumeric: function () {
       const currentResult =
-        isNumeric(str);
+        validators.isNumeric(str);
 
       isValid =
         isValid && currentResult;
@@ -123,19 +119,7 @@ function validator(str = "") {
       }
       return pipe;
     },
-    isNumeric: function () {
-      const currentResult =
-        isNumeric(str);
 
-      isValid =
-        isValid && currentResult;
-      if (!currentResult) {
-        errors.push(
-          pipe.isNumeric.name
-        );
-      }
-      return pipe;
-    },
     result: () => ({
       isValid,
       errors,
