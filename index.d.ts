@@ -48,7 +48,7 @@ type ValidationMethod = Exclude<
   "result" | "isValid"
 >;
 
-interface ValidationResult {
+export interface ValidationResult {
   isValid: boolean;
   errors: ValidationMethod[];
 }
