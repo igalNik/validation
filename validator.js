@@ -52,12 +52,13 @@ function validator(str = "") {
       return pipe;
     },
     isValidEmail: function () {
-      const isValidEmail =
+      const currentResult =
         validateEmail(str);
 
-      isValid = isValid && isValidEmail;
+      isValid =
+        isValid && currentResult;
 
-      if (!isValidEmail) {
+      if (!currentResult) {
         errors.push(
           pipe.isValidEmail.name
         );
@@ -66,17 +67,14 @@ function validator(str = "") {
     },
     isValidIsraeliMobileNumber:
       function () {
-        const isValidIsraeliMobileNumber =
+        const currentResult =
           validateIsraeliMobileNumber(
             str
           );
 
         isValid =
-          isValid &&
-          isValidIsraeliMobileNumber;
-        if (
-          !isValidIsraeliMobileNumber
-        ) {
+          isValid && currentResult;
+        if (!currentResult) {
           errors.push(
             pipe
               .isValidIsraeliMobileNumber
@@ -87,13 +85,12 @@ function validator(str = "") {
       },
     isAlphaHebrewOrEnglish:
       function () {
-        const isAlphaHebrewOrEnglish =
+        const currentResult =
           isAlphaHebrewOrEnglish(str);
 
         isValid =
-          isValid &&
-          isAlphaHebrewOrEnglish;
-        if (!isAlphaHebrewOrEnglish) {
+          isValid && currentResult;
+        if (!currentResult) {
           errors.push(
             pipe.isAlphaHebrewOrEnglish
               .name
@@ -102,10 +99,12 @@ function validator(str = "") {
         return pipe;
       },
     isNumeric: function () {
-      const isNumeric = isNumeric(str);
+      const currentResult =
+        isNumeric(str);
 
-      isValid = isValid && isNumeric;
-      if (!isNumeric) {
+      isValid =
+        isValid && currentResult;
+      if (!currentResult) {
         errors.push(
           pipe.isNumeric.name
         );
@@ -113,11 +112,11 @@ function validator(str = "") {
       return pipe;
     },
     isStrongPassword: function () {
-      const isStrongPassword =
+      const currentResult =
         isStrongPassword(str);
       isValid =
-        isValid && isStrongPassword;
-      if (!isStrongPassword) {
+        isValid && currentResult;
+      if (!currentResult) {
         errors.push(
           pipe.isStrongPassword.name
         );
@@ -125,9 +124,16 @@ function validator(str = "") {
       return pipe;
     },
     isNumeric: function () {
-      const isNumeric = isNumeric(str);
+      const currentResult =
+        isNumeric(str);
 
-      isValid = isValid && isNumeric;
+      isValid =
+        isValid && currentResult;
+      if (!currentResult) {
+        errors.push(
+          pipe.isNumeric.name
+        );
+      }
       return pipe;
     },
     result: () => ({
