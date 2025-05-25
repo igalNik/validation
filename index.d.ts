@@ -53,6 +53,6 @@ export interface ValidationResult {
   errors: ValidationMethod[];
 }
 
-export function validate(
+export function validator(
   str?: string
 ): ValidationPipe;
