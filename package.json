@@ -1,6 +1,6 @@
 {
   "name": "@igalni/logistic-validation",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "main": "index.js",
   "types": "index.d.ts",
   "dependencies": {
