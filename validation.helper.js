@@ -59,11 +59,12 @@ function validateIsraeliMobileNumber(
  */
 
 function isAlphaHebrewOrEnglish(str) {
-  const alphaHebrewOrEnglishRegex =
-    /^(?:[a-zA-Z"]{2,}|[\u0590-\u05FF"]{2,})$/;
-  return alphaHebrewOrEnglishRegex.test(
+  const isHebrew =
+    /^[\u0590-\u05FF"]+$/.test(str);
+  const isEnglish = /^[a-zA-Z"]+$/.test(
     str
   );
+  return isHebrew || isEnglish;
 }
 
 /**
